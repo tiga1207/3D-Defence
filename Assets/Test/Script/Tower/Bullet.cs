@@ -1,14 +1,18 @@
 using UnityEngine;
 using DesignPattern;
+using Test;
 
 public class Bullet : PooledObject
 {
+    // private TowerTest tower;
     private Vector3 _direction;
     [SerializeField] private float speed = 5f;
     [SerializeField] private float lifeTime = 3f;
 
     [SerializeField] private float _timer;
     Rigidbody rb;
+    TowerTest tower;
+    // ObjectPool particlePool;
 
     void Awake()
     {
@@ -19,10 +23,13 @@ public class Bullet : PooledObject
         _timer = 0f;
         enabled = true;
     }
-    public void BulletInit(Vector3 direction)
+    // public void BulletInit(Vector3 direction, ObjectPool effectpool)
+    public void BulletInit(Vector3 direction, TowerTest _tower)
     {
         _direction = direction.normalized;
         _timer = 0f; // 수명 타이머 초기화
+        // particlePool = effectpool;
+        tower = _tower;
 
         //리지드 바디 초기화(안 해주면 계속 속도 누적됨.)
         if (rb != null)
@@ -42,6 +49,7 @@ public class Bullet : PooledObject
         _timer += Time.deltaTime;
         if (_timer >= lifeTime)
         {
+            tower.SpawnEffect(transform.position);
             ReturnPool(); // 일정 시간 지나면 풀로 반환
         }
     }
@@ -50,6 +58,10 @@ public class Bullet : PooledObject
     {
         if (other.CompareTag("Monster"))
         {
+            // var effect = particlePool?.PopPool() as BulletParticle;
+            // effect?.Activate(transform.position);
+            tower.SpawnEffect(transform.position);
+            
             // 데미지 처리 등 가능
             ReturnPool(); // 풀로 반환
         }

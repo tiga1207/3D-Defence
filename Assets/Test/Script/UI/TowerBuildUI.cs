@@ -16,10 +16,13 @@ namespace Test
         [SerializeField] private Button sellBtn;
         [SerializeField] private Button upgradeBtn;
 
-        public static Action OnTextInteractOpen;
-        public static Action OnTextInteractClose;
+        public static event Action OnTextInteractOpen;
+        public static event Action OnTextInteractClose;
 
         public static TowerBuildUI instance;
+
+        public static void InvokeOpen() => OnTextInteractOpen?.Invoke();
+        public static void InvokeClose() => OnTextInteractClose?.Invoke();
 
 
         void Awake() => base.SingletonInit();

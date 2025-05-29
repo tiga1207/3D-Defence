@@ -38,8 +38,11 @@ namespace Test
             if (Input.GetKey(KeyCode.F) && isPlayerInside)
             {
                 Debug.Log("F키 눌림");
-                TowerBuildUI.OnTextInteractClose?.Invoke();
-                TowerZoneEvent.OnTowerInteract?.Invoke(this);
+                // TowerBuildUI.OnTextInteractClose?.Invoke();
+                TowerBuildUI.InvokeClose();
+
+                // TowerZoneEvent.OnTowerInteract?.Invoke(this);
+                TowerZoneEvent.InvokeInteract(this);
             }
         }
 
@@ -51,8 +54,8 @@ namespace Test
                 PlayerTest player = collision.GetComponent<PlayerTest>();
                 player.IsCanInteract = true;
                 isPlayerInside = true;
-                TowerBuildUI.OnTextInteractOpen?.Invoke();
-
+                // TowerBuildUI.OnTextInteractOpen?.Invoke();
+                TowerBuildUI.InvokeOpen();
             }
         }
 
@@ -67,8 +70,10 @@ namespace Test
                 player.IsCanInteract = false;
                 isPlayerInside = false;
 
-                TowerBuildUI.OnTextInteractClose?.Invoke();
-                TowerZoneEvent.OnTowerExit?.Invoke();
+                // TowerBuildUI.OnTextInteractClose?.Invoke();
+                TowerBuildUI.InvokeClose();
+                // TowerZoneEvent.OnTowerExit?.Invoke();
+                TowerZoneEvent.InvokeExit();
             }
         }
 
@@ -82,7 +87,8 @@ namespace Test
             //투명색 머터리얼로 변경.
             triggerRenderer.material = invisibleMaterial;
 
-            TowerZoneEvent.OnTowerExit?.Invoke();
+            // TowerZoneEvent.OnTowerExit?.Invoke();
+            TowerZoneEvent.InvokeExit();
 
         }
 

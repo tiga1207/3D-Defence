@@ -413,10 +413,13 @@ MonoBehaviour:
   level: 0
   dmg: 0
   shootingTransform: {fileID: 2415362151599788878}
-  bulletPrefab: {fileID: -7440817952076136017, guid: c5d14c9dea6c1f84eb71950ff0551534,
-    type: 3}
   delayTime: 0.3
   targetTransform: {fileID: 0}
+  bulletPrefab: {fileID: -7440817952076136017, guid: c5d14c9dea6c1f84eb71950ff0551534,
+    type: 3}
+  particlePrefab: {fileID: -6118445504621559798, guid: da28d8c1da64a824f941e7a88cd00aa8,
+    type: 3}
+  towerAttackSFX: {fileID: 8300000, guid: 4618e8cfb7c5c481b8e7ddfabb9dc89e, type: 3}
 --- !u!114 &5603820674164030110
 MonoBehaviour:
   m_ObjectHideFlags: 0
