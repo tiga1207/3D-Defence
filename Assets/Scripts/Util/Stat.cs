@@ -16,5 +16,9 @@ namespace Util
                 Onchanged?.Invoke();
             }
         }
+        public Stat(T initValue)
+        {
+            _value = initValue;
+        }
     }
 }

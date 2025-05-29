@@ -3,45 +3,64 @@ using System.Collections.Generic;
 using Test;
 using UnityEngine;
 using UnityEngine.UI;
+using DesignPattern;
+using System;
 
 namespace Test
 {
-    public class scrollView : MonoBehaviour
+    public class TowerBuildUI : Singleton<TowerBuildUI>
     {
+        [SerializeField] private GameObject PressFTextUI;
         [SerializeField] private GameObject scrollViewObj;
         [SerializeField] private Button buildBtn;
         [SerializeField] private Button sellBtn;
         [SerializeField] private Button upgradeBtn;
 
-        public static scrollView instance;
-        void Awake()
-        {
-            if (instance == null)
-            {
-                instance = this;
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
-        }
+        public static Action OnTextInteractOpen;
+        public static Action OnTextInteractClose;
+
+        public static TowerBuildUI instance;
 
 
+        void Awake() => base.SingletonInit();
 
-        private Test.triggerTower currentTrigger;
+        private Test.TriggerTower currentTrigger;
 
         void Start()
         {
+            PressFTextUI.gameObject.SetActive(false);
             scrollViewObj.SetActive(false);
             buildBtn.onClick.AddListener(OnClickBuild);
             sellBtn.onClick.AddListener(OnClickSell);
             upgradeBtn.onClick.AddListener(OnClickUpgrade);
         }
 
-        public void OpenScrollView(Test.triggerTower trigger)
+        void OnEnable()
+        {
+            TowerZoneEvent.OnTowerInteract += OpenScrollView;
+            TowerZoneEvent.OnTowerExit += CloseScrollView;
+            OnTextInteractOpen += OpenPressTextUI;
+            OnTextInteractClose += ClosePressTextUI;
+        }
+
+        void OnDisable()
+        {
+            TowerZoneEvent.OnTowerInteract -= OpenScrollView;
+            TowerZoneEvent.OnTowerExit -= CloseScrollView;
+            OnTextInteractOpen -= OpenPressTextUI;
+            OnTextInteractClose -= ClosePressTextUI;
+        }
+
+        #region ScrollVeiw
+
+        public void OpenScrollView(Test.TriggerTower trigger)
         {
             currentTrigger = trigger;
             scrollViewObj.SetActive(true);
+            
+            //커서 활성화
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
 
             // 버튼 비활성화 여부
             buildBtn.interactable = trigger.CanBuild();
@@ -53,8 +72,11 @@ namespace Test
         {
             scrollViewObj.SetActive(false);
             currentTrigger = null;
-        }
 
+            //커서 비활성화
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
         private void OnClickBuild()
         {
             if (currentTrigger != null)
@@ -85,6 +107,23 @@ namespace Test
             }
 
         }
+
+        #endregion
+
+        #region Press F Text UI
+        public void OpenPressTextUI()
+        {
+            PressFTextUI.gameObject.SetActive(true);
+        }
+        public void ClosePressTextUI()
+        {
+            PressFTextUI.gameObject.SetActive(false);
+        }
+
+        #endregion
+
+
+
 
     }
 }

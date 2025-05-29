@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using Util;
 
-public class HpController : MonoBehaviour
+public class CommonModel : MonoBehaviour
 {
-    Stat<int> Hp = new();
-    Stat<int> MaxHp = new();
+    Stat<int> Hp = new(100);
+    Stat<int> MaxHp = new(100);
     public bool IsDead => Hp.Value <=0;
 
     void Start()

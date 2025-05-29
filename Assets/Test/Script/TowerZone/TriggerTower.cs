@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Test;
@@ -7,13 +8,8 @@ using UnityEngine;
 
 namespace Test
 {
-    public class triggerTower : MonoBehaviour
+    public class TriggerTower : MonoBehaviour
     {
-
-        //텍스트 패널(Presss to Interact)
-        [SerializeField] private GameObject text;
-        // [SerializeField] private GameObject scrollView;
-        private static scrollView scrollView;
 
         //타워 프리펩
         [SerializeField] private GameObject towerPrefab;
@@ -35,23 +31,15 @@ namespace Test
 
         // PlayerTest player;
 
-
-        void Start()
-        {
-            text.gameObject.SetActive(false);
-            if (scrollView == null)
-                scrollView = FindObjectOfType<scrollView>();
-            // player = GetComponent<PlayerTest>();
-        }
+        public bool CanBuild() => CanBuildTower;
 
         void Update()
         {
             if (Input.GetKey(KeyCode.F) && isPlayerInside)
             {
                 Debug.Log("F키 눌림");
-                text.gameObject.SetActive(false);
-                // scrollView.gameObject.SetActive(false);
-                scrollView.OpenScrollView(this); // 자신을 전달
+                TowerBuildUI.OnTextInteractClose?.Invoke();
+                TowerZoneEvent.OnTowerInteract?.Invoke(this);
             }
         }
 
@@ -60,11 +48,10 @@ namespace Test
             if (collision.CompareTag("Player"))
             {
                 Debug.Log("트리거 진입.");
-                // PlayerTest player = collision.GetComponent<PlayerTest>();
                 PlayerTest player = collision.GetComponent<PlayerTest>();
-                text.gameObject.SetActive(true);
                 player.IsCanInteract = true;
                 isPlayerInside = true;
+                TowerBuildUI.OnTextInteractOpen?.Invoke();
 
             }
         }
@@ -75,11 +62,13 @@ namespace Test
             {
                 Debug.Log("트리거 탈출.");
                 // PlayerTest player = collision.GetComponent<PlayerTest>();
+                //플레이어 상태 작성하는 코드에서 iscanInteract상태 받기
                 PlayerTest player = collision.GetComponent<PlayerTest>();
-                text.gameObject.SetActive(false);
                 player.IsCanInteract = false;
                 isPlayerInside = false;
-                scrollView.CloseScrollView();
+
+                TowerBuildUI.OnTextInteractClose?.Invoke();
+                TowerZoneEvent.OnTowerExit?.Invoke();
             }
         }
 
@@ -92,7 +81,8 @@ namespace Test
             CanBuildTower = false;
             //투명색 머터리얼로 변경.
             triggerRenderer.material = invisibleMaterial;
-            scrollView.CloseScrollView();
+
+            TowerZoneEvent.OnTowerExit?.Invoke();
 
         }
 
@@ -120,7 +110,7 @@ namespace Test
             }
         }
 
-        public bool CanBuild() => CanBuildTower;
+
 
     }
 }

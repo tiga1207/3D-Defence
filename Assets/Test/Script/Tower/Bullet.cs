@@ -23,6 +23,8 @@ public class Bullet : PooledObject
     {
         _direction = direction.normalized;
         _timer = 0f; // 수명 타이머 초기화
+
+        //리지드 바디 초기화(안 해주면 계속 속도 누적됨.)
         if (rb != null)
         {
             rb.velocity = Vector3.zero;

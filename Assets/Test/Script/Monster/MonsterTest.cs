@@ -18,8 +18,6 @@ namespace Test
             agent = GetComponent<NavMeshAgent>();
             if (agent.isOnNavMesh)
                 MoveToNexus();
-            else
-                Debug.LogError($"{gameObject.name} is not on the NavMesh!");
         }
 
         void Update()
