@@ -14,7 +14,7 @@ namespace Test
 
 
         [SerializeField] private bool isCanInteract;
-        public bool IsCanInteract {get => isCanInteract; set => isCanInteract =value;}
+        public bool IsCanInteract { get => isCanInteract; set => isCanInteract = value; }
 
 
         void Awake()
@@ -34,6 +34,10 @@ namespace Test
             {
                 Quaternion toRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, 720f * Time.deltaTime); // 부드럽게 회전
+            }
+            if (Input.GetKey(KeyCode.Space))
+            {
+                Destroy(gameObject);
             }
         }
 

@@ -1,64 +1,76 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using DesignPattern;
 
 namespace Test
 {
-
     public class TowerTest : MonoBehaviour
     {
         public int level;
         public int dmg;
 
-        //총구 위치
         [SerializeField] private Transform shootingTransform;
-        [SerializeField] private Transform targetTransform;
+        [SerializeField] private Bullet bulletPrefab;
 
-        //포신 머리
-        // [SerializeField] private GameObject turretHead;
+        [SerializeField] private float delayTime = 0.3f;
+        YieldInstruction fireDelay;
 
+        public Transform targetTransform;
+        public Coroutine shootCoroutine;
+        private ObjectPool bulletPool;
         void Start()
         {
+            fireDelay = new WaitForSeconds(delayTime);
 
+             bulletPool = new ObjectPool(gameObject.transform, bulletPrefab, 10);
         }
 
         void Update()
         {
             if (targetTransform != null)
-            {
-                RotateTarret();
-                Vector3 direction =  (targetTransform.position - transform.position).normalized;
-                
-            }
+                RotateTurret();
         }
 
-        //포탑 몬스터 방향으로 회전
-        private void RotateTarret()
+        void OnDestroy()
+        {
+            if (shootCoroutine != null)
+            {
+                StopCoroutine(shootCoroutine);
+                shootCoroutine = null;
+            }
+            targetTransform = null;
+        }
+
+        private void RotateTurret()
         {
             Vector3 target = new(targetTransform.position.x, transform.position.y, targetTransform.position.z);
             transform.LookAt(target);
         }
 
-        void OnTriggerEnter(Collider other)
+        public IEnumerator CoShoot()
         {
-            if (other.CompareTag("Monster"))
+            while (targetTransform != null)
             {
-                if (targetTransform == null)
+                if (targetTransform != null)
                 {
-
-                    targetTransform = other.transform;
+                    yield return fireDelay;
+                    Shoot();
                 }
             }
+            shootCoroutine = null;
         }
 
-
-        void OnTriggerExit(Collider other)
+        private void Shoot()
         {
-            targetTransform = null;
+            if (bulletPrefab == null || shootingTransform == null || targetTransform == null)
+                return;
+            Vector3 direction = targetTransform.position - shootingTransform.position;
+            Bullet bullet = bulletPool.PopPool() as Bullet;
+            bullet.transform.position = shootingTransform.position;
+            bullet.transform.rotation = Quaternion.LookRotation(direction);
+            bullet.BulletInit(direction);
+
         }
-
-
 
     }
-
 }

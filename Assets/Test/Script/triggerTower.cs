@@ -60,6 +60,7 @@ namespace Test
             if (collision.CompareTag("Player"))
             {
                 Debug.Log("트리거 진입.");
+                // PlayerTest player = collision.GetComponent<PlayerTest>();
                 PlayerTest player = collision.GetComponent<PlayerTest>();
                 text.gameObject.SetActive(true);
                 player.IsCanInteract = true;
@@ -73,6 +74,7 @@ namespace Test
             if (collision.CompareTag("Player"))
             {
                 Debug.Log("트리거 탈출.");
+                // PlayerTest player = collision.GetComponent<PlayerTest>();
                 PlayerTest player = collision.GetComponent<PlayerTest>();
                 text.gameObject.SetActive(false);
                 player.IsCanInteract = false;
@@ -114,7 +116,7 @@ namespace Test
                 TowerTest tower = builtTower.GetComponent<TowerTest>();
 
                 //Todo: 레벨업 이벤트 호출
-                tower.level += 1; //임시
+                // tower.level += 1; //임시
             }
         }
 
