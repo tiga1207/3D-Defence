@@ -6,7 +6,6 @@ using UnityEngine;
 public class AudioManager : Singleton<AudioManager>
 {
     private AudioSource bgmSource;
-    private AudioSource sfxSource;
     private ObjectPool _sfxPool;
     [SerializeField] private SFXController _sfxPrefab;
 
