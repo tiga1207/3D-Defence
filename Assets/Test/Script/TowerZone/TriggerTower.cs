@@ -38,10 +38,7 @@ namespace Test
             if (Input.GetKey(KeyCode.F) && isPlayerInside)
             {
                 Debug.Log("F키 눌림");
-                // TowerBuildUI.OnTextInteractClose?.Invoke();
                 TowerBuildUI.InvokeClose();
-
-                // TowerZoneEvent.OnTowerInteract?.Invoke(this);
                 TowerZoneEvent.InvokeInteract(this);
             }
         }
@@ -54,7 +51,6 @@ namespace Test
                 PlayerTest player = collision.GetComponent<PlayerTest>();
                 player.IsCanInteract = true;
                 isPlayerInside = true;
-                // TowerBuildUI.OnTextInteractOpen?.Invoke();
                 TowerBuildUI.InvokeOpen();
             }
         }
@@ -65,7 +61,7 @@ namespace Test
             {
                 Debug.Log("트리거 탈출.");
                 // PlayerTest player = collision.GetComponent<PlayerTest>();
-                //플레이어 상태 작성하는 코드에서 iscanInteract상태 받기
+                //TODO: 플레이어 상태 작성하는 코드에서 iscanInteract상태 받기
                 PlayerTest player = collision.GetComponent<PlayerTest>();
                 player.IsCanInteract = false;
                 isPlayerInside = false;
