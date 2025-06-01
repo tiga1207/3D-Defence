@@ -9,6 +9,7 @@ namespace Test
     {
         public int level;
         public int dmg;
+        public int hp;
 
         [SerializeField] private Transform shootingTransform;
 
@@ -72,8 +73,8 @@ namespace Test
         {
             if (bulletPrefab == null || shootingTransform == null || targetTransform == null)
                 return;
-
-            Vector3 direction = targetTransform.position - shootingTransform.position;
+            Vector3 targetPos = targetTransform.position + Vector3.up * 1f;
+            Vector3 direction = targetPos - shootingTransform.position;
             Bullet bullet = bulletPool.PopPool() as Bullet;
             bullet.transform.position = shootingTransform.position;
             bullet.transform.rotation = Quaternion.LookRotation(direction);

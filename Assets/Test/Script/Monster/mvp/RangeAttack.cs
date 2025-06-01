@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class RangeAttack : MonoBehaviour
 {
-    [SerializeField] Transform somwhere;
     private MonsterModel model;
     [SerializeField]private MonsterAudio audio;
 
@@ -26,7 +25,8 @@ public class RangeAttack : MonoBehaviour
 
         if (arrowPrefab == null || arrowShootingTransform == null || model.attackTarget == null) return;
 
-        Vector3 dircetionToPlayer = model.attackTarget.position - arrowShootingTransform.position;
+        Vector3 targetPos = model.attackTarget.position + Vector3.up * 1f;
+        Vector3 dircetionToPlayer = targetPos - arrowShootingTransform.position;
         Arrow arrow = arrowPool.PopPool() as Arrow;
         arrow.transform.position = arrowShootingTransform.position;
 
