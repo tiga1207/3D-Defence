@@ -16,20 +16,34 @@ public class GameSettingUI : MonoBehaviour
     }
     private void OnEnable()
     {
-        GameTimeManager.Instance.OnGamePaused += ShowUI;
-        GameTimeManager.Instance.OnGameResumed += HideUI;
+        // GameManager.Instance.GameTime.OnGamePaused += ShowUI;
+        // GameManager.Instance.GameTime.OnGameResumed += HideUI;
+        if (GameTimeManager.Instance != null)
+        {
+            GameTimeManager.Instance.OnGamePaused += ShowUI;
+            GameTimeManager.Instance.OnGameResumed += HideUI;
+        }
     }
 
     private void OnDisable()
     {
-        GameTimeManager.Instance.OnGamePaused -= ShowUI;
-        GameTimeManager.Instance.OnGameResumed -= HideUI;
+        // GameManager.Instance.GameTime.OnGamePaused -= ShowUI;
+        // GameManager.Instance.GameTime.OnGameResumed -= HideUI;
+        if (GameTimeManager.Instance != null)
+        {  
+            GameTimeManager.Instance.OnGamePaused -= ShowUI;
+            GameTimeManager.Instance.OnGameResumed -= HideUI;
+        }
     }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            // if (GameManager.Instance.GameTime.IsPaused)
+            //     GameManager.Instance.GameTime.ResumeGame();
+            // else
+            //     GameManager.Instance.GameTime.PauseGame();
             if (GameTimeManager.Instance.IsPaused)
                 GameTimeManager.Instance.ResumeGame();
             else
@@ -39,6 +53,7 @@ public class GameSettingUI : MonoBehaviour
 
     public void OnClickResume()
     {
+        // GameManager.Instance.GameTime.ResumeGame();
         GameTimeManager.Instance.ResumeGame();
     }
     private void ShowUI()

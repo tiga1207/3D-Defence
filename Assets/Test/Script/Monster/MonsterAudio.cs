@@ -15,6 +15,7 @@ public class MonsterAudio : MonoBehaviour
         if (_clip != null)
         {
             SFXController sfx = AudioManager.Instance.GetSFX();
+            // SFXController sfx = GameManager.Instance.Audio.GetSFX();
             if (sfx != null)
             {
                 sfx.Play(_clip);

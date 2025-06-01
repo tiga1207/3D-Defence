@@ -5,6 +5,7 @@ public class RangeAttack : MonoBehaviour
 {
     [SerializeField] Transform somwhere;
     private MonsterModel model;
+    [SerializeField]private MonsterAudio audio;
 
     [SerializeField] private Arrow arrowPrefab;
     private ObjectPool arrowPool;
@@ -18,11 +19,11 @@ public class RangeAttack : MonoBehaviour
     }
     void Start()
     {
-        arrowPool = new ObjectPool(gameObject.transform, arrowPrefab, 10);
+        arrowPool = new ObjectPool(null, arrowPrefab, 10);
     }
     public void ShotingArrow()
     {
-       
+
         if (arrowPrefab == null || arrowShootingTransform == null || model.attackTarget == null) return;
 
         Vector3 dircetionToPlayer = model.attackTarget.position - arrowShootingTransform.position;
@@ -30,6 +31,8 @@ public class RangeAttack : MonoBehaviour
         arrow.transform.position = arrowShootingTransform.position;
 
         arrow.ArrowInit(dircetionToPlayer);
+        audio.ShootingSound();
+        Debug.Log("화살발사");
     }
 
     //공격 애니메이션 첫 프레임에 호출

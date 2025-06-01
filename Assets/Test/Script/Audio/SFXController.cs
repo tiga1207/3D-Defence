@@ -13,6 +13,7 @@ public class SFXController : PooledObject
     private void OnEnable()
     {
         _audioSource.volume = AudioManager.Instance.sfxSoundVolume;
+        // _audioSource.volume = GameManager.Instance.Audio.sfxSoundVolume;
     }
     private void Init()
     {
@@ -36,6 +37,7 @@ public class SFXController : PooledObject
     {
         _audioSource.Stop();
         _audioSource.clip = clip;
+        // _audioSource.volume = AudioManager.Instance.sfxSoundVolume;
         _audioSource.volume = AudioManager.Instance.sfxSoundVolume;
 
         _audioSource.Play();

@@ -34,6 +34,7 @@ public class Arrow : PooledObject
     {
         _direction = direction.normalized;
         timer = 0f; // 수명 타이머 초기화
+        transform.rotation = Quaternion.LookRotation(_direction);
     }
     void Update()
     {

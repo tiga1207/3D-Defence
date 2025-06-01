@@ -17,6 +17,7 @@ public class TowerDectTrigger : MonoBehaviour
 
         if (other.CompareTag("Monster"))
         {
+            Debug.Log("몬스터 발견");
             if (tower.targetTransform == null)
             {
                 tower.targetTransform = other.transform;

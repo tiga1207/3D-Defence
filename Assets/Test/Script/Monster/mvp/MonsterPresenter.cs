@@ -75,7 +75,6 @@ public class MonsterPresenter : MonoBehaviour
         model.StartAttack();
         model.isAttacking = true;
         model.canAttack = false;
-
         // 공격 전 방향 회전
         model.LookTarget();
 
@@ -130,12 +129,12 @@ public class MonsterPresenter : MonoBehaviour
 
             if (model.isAttacking)
             {
-                // ✅ 공격 도중 이탈: 공격 끝나고 추적하도록 표시
+                // 공격 도중 이탈: 공격 끝나고 추적하도록 표시
                 model.isAttackInterrupted = true;
             }
             else
             {
-                // ✅ 공격 중이 아닐 때는 바로 추적
+                // 공격 중이 아닐 때는 바로 추적
                 model.ChaseTarget(target);
             }
         }

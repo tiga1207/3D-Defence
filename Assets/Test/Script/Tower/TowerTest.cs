@@ -27,9 +27,9 @@ namespace Test
         {
             fireDelay = new WaitForSeconds(delayTime);
 
-            bulletPool = new ObjectPool(gameObject.transform, bulletPrefab, 10);
+            bulletPool = new ObjectPool(null, bulletPrefab, 10);
 
-            bulletParticlePool = new ObjectPool(gameObject.transform, particlePrefab, 10);
+            bulletParticlePool = new ObjectPool(null, particlePrefab, 10);
 
         }
 
@@ -85,6 +85,7 @@ namespace Test
 
         private void PlayShootSFX()
         {
+            // SFXController sfx = GameManager.Instance.Audio.GetSFX();
             SFXController sfx = AudioManager.Instance.GetSFX();
             sfx.Play(towerAttackSFX);
         }

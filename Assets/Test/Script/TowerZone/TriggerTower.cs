@@ -48,7 +48,7 @@ namespace Test
             if (collision.CompareTag("Player"))
             {
                 Debug.Log("트리거 진입.");
-                PlayerTest player = collision.GetComponent<PlayerTest>();
+                PlayerModel player = collision.GetComponent<PlayerModel>();
                 player.IsCanInteract = true;
                 isPlayerInside = true;
                 TowerBuildUI.InvokeOpen();
@@ -62,7 +62,7 @@ namespace Test
                 Debug.Log("트리거 탈출.");
                 // PlayerTest player = collision.GetComponent<PlayerTest>();
                 //TODO: 플레이어 상태 작성하는 코드에서 iscanInteract상태 받기
-                PlayerTest player = collision.GetComponent<PlayerTest>();
+                PlayerModel player = collision.GetComponent<PlayerModel>();
                 player.IsCanInteract = false;
                 isPlayerInside = false;
 

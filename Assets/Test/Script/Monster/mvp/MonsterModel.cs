@@ -41,11 +41,11 @@ public class MonsterModel : MonoBehaviour
     private NavMeshAgent agent;
     public NavMeshAgent Agent =>agent;
 
-    public Rigidbody Rb { get; private set; }
+    // public Rigidbody Rb { get; private set; }
 
     void Awake()
     {
-        Rb = GetComponent<Rigidbody>();
+        // Rb = GetComponent<Rigidbody>();
         HP = new(initHP);
         MaxHP = new(initMaxHP);
 
@@ -90,8 +90,7 @@ public class MonsterModel : MonoBehaviour
         dir.y = 0;
         if (dir != Vector3.zero)
         {
-            Quaternion rot = Quaternion.LookRotation(dir);
-            transform.rotation = Quaternion.Slerp(transform.rotation, rot, Time.deltaTime * 10f);
+            transform.rotation  = Quaternion.LookRotation(dir);
         }
     }
     public void UpdateDes()

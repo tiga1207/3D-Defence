@@ -56,6 +56,7 @@ public class PlayerMoveTest : MonoBehaviour
     private void Rotate()
     {
         if(GameTimeManager.Instance.IsPaused) return;
+        // if(GameManager.Instance.GameTime.IsPaused) return;
         
         currentRotation.x += mouseDelta.x;
         currentRotation.y = Mathf.Clamp(currentRotation.y + mouseDelta.y, minPitch, maxPitch);

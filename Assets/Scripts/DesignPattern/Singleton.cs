@@ -14,7 +14,7 @@ namespace DesignPattern
                 if(_instance == null)
                 {
                     _instance = FindObjectOfType<T>();
-                    DontDestroyOnLoad(_instance);
+                    // DontDestroyOnLoad(_instance);
                 }
                 return _instance;
             }
@@ -29,7 +29,7 @@ namespace DesignPattern
             else
             {
                 _instance = this as T;
-                DontDestroyOnLoad(_instance);
+                DontDestroyOnLoad(gameObject);
             }
         }
     }
