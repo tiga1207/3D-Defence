@@ -4,7 +4,7 @@ using UnityEngine;
 public class RangeAttack : MonoBehaviour
 {
     private MonsterModel model;
-    [SerializeField]private MonsterAudio audio;
+    [SerializeField]private MonsterAudio _audio;
 
     [SerializeField] private Arrow arrowPrefab;
     private ObjectPool arrowPool;
@@ -30,9 +30,8 @@ public class RangeAttack : MonoBehaviour
         Arrow arrow = arrowPool.PopPool() as Arrow;
         arrow.transform.position = arrowShootingTransform.position;
 
-        arrow.ArrowInit(dircetionToPlayer);
-        audio.ShootingSound();
-        Debug.Log("화살발사");
+        arrow.ArrowInit(dircetionToPlayer,model.Damage.Value);
+        _audio.ShootingSound();
     }
 
     //공격 애니메이션 첫 프레임에 호출

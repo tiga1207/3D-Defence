@@ -1,23 +1,51 @@
 using UnityEngine;
 public class MeelAttack: MonoBehaviour
 {
-    MonsterModel model;
+    MonsterModel monsterModel;
+    PlayerModel playerModel;
+    MeeleeHitbox meeleeHitbox;
+    [SerializeField] private bool isPlayer = false;
+
 
     void Awake()
     {
-        model = GetComponent<MonsterModel>();
+        if (isPlayer)
+        {
+            playerModel = GetComponent<PlayerModel>();
+        }
+        else
+        {
+            monsterModel = GetComponent<MonsterModel>();
+        }
+        meeleeHitbox = GetComponentInChildren<MeeleeHitbox>();
     }
     public void HitboxStart()
+    {
+        if (isPlayer)
         {
-            model.isAttacking= true;
-            GetComponentInChildren<MeeleeHitbox>().EnableHitbox();
+            playerModel.isAttacking = true;
         }
-        //공격 애니메이션 마지막 프레임에 호출
-        public void HitboxEnd()
+        else
         {
-            model.isAttacking = false;
-            // AttackCoolDownStart();
-            GetComponentInChildren<MeeleeHitbox>().DisableHitbox();
+            monsterModel.isAttacking = true;
         }
+
+        meeleeHitbox.EnableHitbox();
+    }
+    //공격 애니메이션 마지막 프레임에 호출
+    public void HitboxEnd()
+    {
+
+        if (isPlayer)
+        {
+            playerModel.isAttacking = false;
+        }
+        else
+        {
+            monsterModel.isAttacking = false;
+        }
+
+        meeleeHitbox.DisableHitbox();
+    }
 
 }

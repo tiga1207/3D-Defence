@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using DesignPattern;
+using Test;
 using UnityEngine;
 
 public class Arrow : PooledObject
@@ -13,6 +14,7 @@ public class Arrow : PooledObject
     [SerializeField] private float timer;
 
     [SerializeField] private float lifeTime = 3f;
+    private int damage;
 
     //화살 위치
     private Vector3 _direction;
@@ -30,11 +32,12 @@ public class Arrow : PooledObject
         timer = 0f;
     }
 
-    public void ArrowInit(Vector3 direction)
+    public void ArrowInit(Vector3 direction, int _damage)
     {
         _direction = direction.normalized;
         timer = 0f; // 수명 타이머 초기화
         transform.rotation = Quaternion.LookRotation(_direction);
+        damage =_damage;
     }
     void Update()
     {
@@ -55,10 +58,18 @@ public class Arrow : PooledObject
     {
         if (other.CompareTag("Player"))
         {
+            PlayerController player = other.GetComponent<PlayerController>();
+            player.TakeDamage(damage);
 
             // 데미지 처리 등 가능
-            ReturnPool(); // 풀로 반환
         }
+        if (other.CompareTag("Tower"))
+        {
+            TowerTest tower = other.GetComponent<TowerTest>();
+            tower.TakeDamage(damage);
+        }
+        ReturnPool(); // 풀로 반환
+
     }
 
 }

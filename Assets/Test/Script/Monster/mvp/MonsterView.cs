@@ -25,6 +25,10 @@ public class MonsterView : MonoBehaviour, IMonsterView
     public void PlayDeathAnimation() => anim.SetBool("isMonsterDie", true);
 
     public void PlayMoveAnimation(float speed) => anim.SetFloat("Speed", speed, 0.2f, Time.deltaTime);
+    public void MonsterDied()
+    {
+        Destroy(gameObject);
+    }
 
 
 }

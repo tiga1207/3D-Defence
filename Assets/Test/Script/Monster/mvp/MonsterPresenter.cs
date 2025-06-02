@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MonsterPresenter : MonoBehaviour
+public class MonsterPresenter
 {
     private MonsterModel model;
     private IMonsterView view;
@@ -139,5 +139,15 @@ public class MonsterPresenter : MonoBehaviour
             }
         }
     }
+
+    // public void SetTarget(IDamageable target)
+    // {
+    //     model.targetDamageable = target;
+    // }
+    // public void ClearTarget(IDamageable target)
+    // {
+    //     if(model.targetDamageable == target)
+    //         model.targetDamageable = null;
+    // }
 
 }

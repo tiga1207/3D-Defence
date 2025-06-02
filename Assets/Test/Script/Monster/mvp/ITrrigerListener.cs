@@ -12,5 +12,7 @@ namespace Test
     {
         void OnInAttackRange(Transform target);
         void OnOutAttackRange(Transform target);
+        // void SetTarget(IDamageable target);
+        // void ClearTager(IDamageable target);
     }
 }

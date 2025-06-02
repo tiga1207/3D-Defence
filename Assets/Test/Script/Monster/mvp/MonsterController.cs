@@ -18,11 +18,20 @@ public class MonsterController : MonoBehaviour, IAggroListener, IAttackRangeList
         presenter.Update();
         // presenter.TryAttack();
     }
+    public void TakeDamage(int dmg)
+    {
+        presenter.TakeDamage(dmg);
+    }
 
-    //인터페이스 구현현
+    //인터페이스 구현
     public void OnTargetDetected(Transform target) => presenter.OnTargetDetected(target);
     public void OnLoseTarget(Transform target) => presenter.OnLoseTarget(target);
     public void OnInAttackRange(Transform target) => presenter.OnInAttackRange(target);
     public void OnOutAttackRange(Transform target) => presenter.OnOutAttackRange(target);
+
+    // public void SetTarget(IDamageable target) =>presenter.SetTarget(target);
+
+    // public void ClearTager(IDamageable target) =>presenter.ClearTarget(target);
+
 
 }

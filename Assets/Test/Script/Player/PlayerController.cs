@@ -1,18 +1,20 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IDamageable
 {
-    private PlayerModel model;
     private PlayerPresenter presenter;
 
     private void Awake()
     {
-        model = GetComponent<PlayerModel>();
-        presenter = new PlayerPresenter(model, GetComponent<IPlayerView>());
-        Debug.Log("test");
+        var model = GetComponent<PlayerModel>();
+        var view = GetComponent<IPlayerView>();
+        presenter = new PlayerPresenter(model, view, this);
     }
-
+    private void Update()
+    {
+        presenter.Update();
+    }
     private void FixedUpdate()
     {
         presenter.Move();
@@ -23,6 +25,20 @@ public class PlayerController : MonoBehaviour
         presenter.Rotate();
     }
 
-    public void OnMove(InputValue value) => presenter.OnMove(value);
+    public void TakeDamage(int dmg)
+    {
+        presenter.TakeDamage(dmg);
+    }
+
+    public void OnMove(InputValue value) { presenter.OnMove(value); }
     public void OnRotate(InputValue value) => presenter.OnRotate(value);
+    public void OnAttack(InputValue value)
+    {
+        if (value.isPressed)
+        {
+            presenter.TryAttack();
+            // presenter.Test();
+            // Debug.Log("공격 키 눌림");
+        }
+    }
 }

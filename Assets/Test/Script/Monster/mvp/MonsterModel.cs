@@ -23,7 +23,9 @@ public class MonsterModel : MonoBehaviour
     public Stat<int> MaxHP { get; private set; }
 
     [Header("공격 설정")]
-    public int atkDmg =2;
+    // public int atkDmg =2;
+    [SerializeField] private int initAtkDmg =2;
+    public Stat<int> Damage;
     public AttackType attackType;
     public float attackCooldown = 1f;
     public bool canAttack = true;
@@ -40,6 +42,7 @@ public class MonsterModel : MonoBehaviour
     // public Transform AttackTarget { get; private set; }
     private NavMeshAgent agent;
     public NavMeshAgent Agent =>agent;
+    // public IDamageable targetDamageable;
 
     // public Rigidbody Rb { get; private set; }
 
@@ -48,6 +51,7 @@ public class MonsterModel : MonoBehaviour
         // Rb = GetComponent<Rigidbody>();
         HP = new(initHP);
         MaxHP = new(initMaxHP);
+        Damage = new(initAtkDmg);
 
         agent = GetComponent<NavMeshAgent>();
     }

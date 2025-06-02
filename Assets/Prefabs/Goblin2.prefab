@@ -893,6 +893,7 @@ GameObject:
   - component: {fileID: 869213095442182725}
   - component: {fileID: 8208689387249315488}
   - component: {fileID: 4812936243344365409}
+  - component: {fileID: 6461469267632660881}
   m_Layer: 7
   m_Name: Goblin2
   m_TagString: Monster
@@ -1045,11 +1046,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fad053934f181cf41a19bb9303539b58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  somwhere: {fileID: 0}
-  audio: {fileID: 0}
+  _audio: {fileID: 6461469267632660881}
   arrowPrefab: {fileID: 113228394807776239, guid: 041f0591c380e6d4b9e1a0ec84b560d2,
     type: 3}
   arrowShootingTransform: {fileID: 2731583911060096585}
+--- !u!114 &6461469267632660881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 944514543498036531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 109f13a649601c644889cc1cf5cb2948, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_shotSound: {fileID: 8300000, guid: 51a75955cea7541b0809fed2de82be21, type: 3}
+  m_hurtSound: {fileID: 8300000, guid: 3824f145e1a6d2b448be9a786b0903eb, type: 3}
+  m_slashSound: {fileID: 8300000, guid: 480e67b9b7afe460896a20d71a4f0617, type: 3}
+  m_deadSound: {fileID: 8300000, guid: c7bd57922f10a3148b953fcabcce3f54, type: 3}
 --- !u!1 &1021614894529511336
 GameObject:
   m_ObjectHideFlags: 0

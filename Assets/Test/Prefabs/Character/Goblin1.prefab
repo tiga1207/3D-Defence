@@ -797,13 +797,14 @@ GameObject:
   - component: {fileID: 8531345624450090225}
   - component: {fileID: 5699114849678988935}
   - component: {fileID: 2171996760986225740}
+  - component: {fileID: 8488842077842018813}
   m_Layer: 0
   m_Name: Goblin1
   m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6848081486657131623
 Transform:
   m_ObjectHideFlags: 0
@@ -950,7 +951,7 @@ NavMeshAgent:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 944514543498036531}
   m_Enabled: 1
-  m_AgentTypeID: -334000983
+  m_AgentTypeID: 1479372276
   m_Radius: 0.5
   m_Speed: 3.5
   m_Acceleration: 8
@@ -976,6 +977,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ee1115a9224a7e4c8c5bbdae01ca6ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8488842077842018813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 944514543498036531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 109f13a649601c644889cc1cf5cb2948, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_shotSound: {fileID: 0}
+  m_hurtSound: {fileID: 0}
+  m_slashSound: {fileID: 0}
+  m_deadSound: {fileID: 0}
 --- !u!1 &1021614894529511336
 GameObject:
   m_ObjectHideFlags: 0

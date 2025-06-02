@@ -16,6 +16,7 @@ namespace Test
 
         // 생성된 타워
         private GameObject builtTower;
+        [SerializeField] private TowerTest tower;
 
 
 
@@ -79,6 +80,9 @@ namespace Test
             if (!CanBuildTower) return;
 
             builtTower = Instantiate(towerPrefab, transform.position + Vector3.up * 0.5f, Quaternion.identity);
+            tower = builtTower.GetComponent<TowerTest>();
+            tower.towerZone = this;
+
             CanBuildTower = false;
             //투명색 머터리얼로 변경.
             triggerRenderer.material = invisibleMaterial;
@@ -94,21 +98,33 @@ namespace Test
             {
                 Destroy(builtTower);
                 builtTower = null;
+                tower = null;
                 CanBuildTower = true;
 
                 //미설치 머터리얼로 변경.
                 triggerRenderer.material = visibleMaterial;
             }
-
         }
+        public void TowerDestoried()
+        {
+            builtTower = null;
+            tower = null;
+            CanBuildTower = true;
+
+            //미설치 머터리얼로 변경.
+            triggerRenderer.material = visibleMaterial;
+        }
+        
         public void UpgradeTower()
         {
             if (builtTower != null)
             {
-                TowerTest tower = builtTower.GetComponent<TowerTest>();
-
-                //Todo: 레벨업 이벤트 호출
-                // tower.level += 1; //임시
+                if (tower.Level.Value == tower.MaxLevel.Value)
+                {
+                    Debug.Log("타워가 최대 레벨입니다.");
+                    return;
+                }
+                tower.LevelUp();
             }
         }
 

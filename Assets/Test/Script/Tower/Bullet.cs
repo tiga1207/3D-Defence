@@ -62,8 +62,12 @@ public class Bullet : PooledObject
             // var effect = particlePool?.PopPool() as BulletParticle;
             // effect?.Activate(transform.position);
             tower.SpawnEffect(transform.position);
+
+
+            // 데미지 처리
+            MonsterController monster = other.GetComponent<MonsterController>();
+            monster.TakeDamage(tower.Damge.Value);
             
-            // 데미지 처리 등 가능
             ReturnPool(); // 풀로 반환
         }
     }

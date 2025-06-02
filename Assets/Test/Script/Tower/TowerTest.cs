@@ -2,14 +2,29 @@ using System.Collections;
 using UnityEngine;
 using DesignPattern;
 using System;
+using Util;
 
 namespace Test
 {
-    public class TowerTest : MonoBehaviour
+    public class TowerTest : MonoBehaviour, IDamageable
     {
-        public int level;
-        public int dmg;
-        public int hp;
+        //TODO: Util의 Stat사용하기
+
+        [Header("스탯")]
+        //인스펙터에서 초기화 하기 위해.
+        [SerializeField] private int level;
+        [SerializeField] private int maxLevel;
+        [SerializeField] private int initMaxHP;
+        [SerializeField] private int initHP;
+        [SerializeField] private int dmg;
+
+        public Stat<int> HP { get; private set; }
+        public Stat<int> MaxHP { get; private set; }
+        public Stat<int> Damge { get; private set; }
+        public Stat<int> Level { get; private set; }
+        public Stat<int> MaxLevel { get; private set; }
+
+
 
         [SerializeField] private Transform shootingTransform;
 
@@ -24,6 +39,17 @@ namespace Test
         [SerializeField] private BulletParticle particlePrefab;
 
         [SerializeField] private AudioClip towerAttackSFX;
+
+        public TriggerTower towerZone;
+
+        void Awake()
+        {
+            HP = new(initHP);
+            MaxHP = new(initMaxHP);
+            Damge = new(dmg);
+            Level = new(level);
+            MaxLevel = new(maxLevel);
+        }
         void Start()
         {
             fireDelay = new WaitForSeconds(delayTime);
@@ -31,7 +57,6 @@ namespace Test
             bulletPool = new ObjectPool(null, bulletPrefab, 10);
 
             bulletParticlePool = new ObjectPool(null, particlePrefab, 10);
-
         }
 
         void Update()
@@ -100,5 +125,28 @@ namespace Test
 
         }
 
+        //TODO: 데미지 피격 추가 구현 필요
+        public void TakeDamage(int amount)
+        {
+            HP.Value -= amount;
+            if (HP.Value <= 0)
+                TowerDestory();
+        }
+
+        public void TowerDestory()
+        {
+            SpawnEffect(transform.position);
+            towerZone.TowerDestoried();
+            Destroy(gameObject);
+        }
+
+        public void LevelUp()
+        {
+            if (Level.Value == MaxLevel.Value) return;
+            Level.Value += 1;
+            Damge.Value += 1;
+            MaxHP.Value += 5;
+            HP.Value = MaxHP.Value;
+        }
     }
 }
