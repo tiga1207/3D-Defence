@@ -46,6 +46,21 @@ public class GameTimeManager : Singleton<GameTimeManager>
         //게임 재시작 호출
         OnGameResumed?.Invoke();
     }
+    public void QuitGame()
+    {
+        if (!m_isPaused) return;
+
+
+        //현재 게임 속도
+        Time.timeScale = 1f;
+        m_isPaused = false;
+
+        //게임 재시작 호출
+        OnGameResumed?.Invoke();
+        
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
 }
 
 // public void SetTimeScale(float scale)

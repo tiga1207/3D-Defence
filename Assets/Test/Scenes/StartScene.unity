@@ -4721,6 +4721,54 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 750910717}
   m_CullTransparentMesh: 0
+--- !u!1 &795619044
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 795619046}
+  - component: {fileID: 795619045}
+  m_Layer: 0
+  m_Name: PlayerData
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &795619045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 795619044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8dbaf1052b36483e8172f6482e1f017, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 10
+  gold: 10
+  atk: 5
+  mouseSensitivity: 1
+--- !u!4 &795619046
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 795619044}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 450.44446, y: 336.8075, z: -1.9245151}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &859956878
 GameObject:
   m_ObjectHideFlags: 0
@@ -6588,8 +6636,8 @@ RectTransform:
   - {fileID: 1956153818}
   m_Father: {fileID: 1853340416}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.752, y: 0}
-  m_AnchorMax: {x: 0.752, y: 1}
+  m_AnchorMin: {x: 0.545, y: 0}
+  m_AnchorMax: {x: 0.545, y: 1}
   m_AnchoredPosition: {x: -9.399994, y: 0}
   m_SizeDelta: {x: 52, y: 72}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -7365,7 +7413,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.752
+  m_Value: 0.545
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -8896,7 +8944,7 @@ RectTransform:
   m_Father: {fileID: 1481336683}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.752, y: 1}
+  m_AnchorMax: {x: 0.545, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: -0.00000047683716}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -9241,6 +9289,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bgmSlider: {fileID: 166725613}
   sfxSlider: {fileID: 939717895}
+  mousedSlider: {fileID: 1481336685}
 --- !u!1 &1791121325
 GameObject:
   m_ObjectHideFlags: 0
@@ -10601,3 +10650,4 @@ SceneRoots:
   - {fileID: 1025519261}
   - {fileID: 1775290150}
   - {fileID: 124016506}
+  - {fileID: 795619046}

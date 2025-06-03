@@ -25,7 +25,8 @@ public class PlayerPresenter
 
     public void OnRotate(InputValue value)
     {
-        model.mouseDelta = value.Get<Vector2>() * model.mouseSensitivity;
+        // model.mouseDelta = value.Get<Vector2>() * model.mouseSensitivity;
+        model.mouseDelta = value.Get<Vector2>() * PlayerData.Instance.mouseSensitivity;
         model.mouseDelta.y *= -1f;
     }
 

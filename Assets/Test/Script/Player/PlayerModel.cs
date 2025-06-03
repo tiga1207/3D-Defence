@@ -22,7 +22,7 @@ public class PlayerModel : MonoBehaviour
 
     [Header("이동/회전 설정")]
     public float moveSpeed = 5f;
-    public float mouseSensitivity = 1f;
+    // public float mouseSensitivity = 1f;
     [Range(-90f, 0f)] public float minPitch = -60f;
     [Range(0f, 90f)] public float maxPitch = 60f;
 
