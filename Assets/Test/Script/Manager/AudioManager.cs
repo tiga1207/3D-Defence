@@ -28,7 +28,7 @@ public class AudioManager : Singleton<AudioManager>
     //BGM Play
     public void PlayBGM(AudioClip _clip, bool _loop = true)
     {
-        if (_clip == null) return;
+        if (_clip == null || bgmSource.clip == _clip) return;
         bgmSource.clip = _clip;
         bgmSource.loop = _loop;
         bgmSource.volume = bgmSoundVolume;
