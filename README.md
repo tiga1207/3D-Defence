@@ -28,7 +28,6 @@ GitHub 주소 : [https://github.com/tiga1207/3D-Defence](https://github.com/tiga
 ### 1.StartScene
 
 ### 1. 메인 화면
-<img width="747" alt="1" src="https://github.com/user-attachments/assets/ca0edd22-73c4-4be7-a5ab-66dff38f5a2f" />
 
 ![1.png](https://github.com/user-attachments/assets/ca0edd22-73c4-4be7-a5ab-66dff38f5a2f)
 
