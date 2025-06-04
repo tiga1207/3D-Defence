@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Util;
 public class PlayerModel : MonoBehaviour
@@ -11,6 +12,10 @@ public class PlayerModel : MonoBehaviour
     public Stat<int> HP { get; private set; }
     public Stat<int> MaxHP { get; private set; }
     public bool IsDead => HP.Value <= 0;
+    public bool isInvincible = false;
+    public float invincibleTime = 1f;
+
+
 
 
     [Header("공격 설정")]
@@ -37,6 +42,8 @@ public class PlayerModel : MonoBehaviour
     public Transform Avatar;
     public Transform Aim;
 
+    public event Action OnPlayerDied;
+
     void Awake()
     {
         HP = new(initHP);
@@ -47,5 +54,9 @@ public class PlayerModel : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
+    }
+    public void Die()
+    {
+        OnPlayerDied?.Invoke();
     }
 }

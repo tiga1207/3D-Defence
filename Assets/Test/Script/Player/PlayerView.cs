@@ -1,8 +1,11 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerView : MonoBehaviour, IPlayerView
 {
     [SerializeField] Animator anim;
+    [SerializeField] Slider hpSlider;
+
     public void ApplyRotation(Transform player, Transform aim, Vector2 rotation, float minPitch, float maxPitch)
     {
         player.rotation = Quaternion.Euler(0f, rotation.x, 0f);
@@ -11,6 +14,16 @@ public class PlayerView : MonoBehaviour, IPlayerView
             aim.localRotation = Quaternion.Euler(Mathf.Clamp(rotation.y, minPitch, maxPitch), 0f, 0f);
         }
     }
+
+    public void UpdateHpBar(int currentHp, int maxHp)
+    {
+        hpSlider.maxValue = maxHp;
+        hpSlider.value = currentHp;
+        Debug.Log("코드 실행");
+         Debug.Log($"[UI Update] HP: {currentHp} / {maxHp}");
+    }
+
+    //애니메이션
 
     public void PlayAttackAnimation()
     {
@@ -26,4 +39,6 @@ public class PlayerView : MonoBehaviour, IPlayerView
     {
         Destroy(gameObject);
     }
+
+    
 }

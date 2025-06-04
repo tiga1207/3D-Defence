@@ -7,6 +7,7 @@ public class PlayerPresenter
     private PlayerModel model;
     private IPlayerView view;
     private Coroutine attackCooldownCoroutine;
+    private Coroutine invincibleTimeCoroutine;
     private MonoBehaviour mono;
 
 
@@ -16,6 +17,13 @@ public class PlayerPresenter
         model = _model;
         view = _view;
         mono = _mono;
+    }
+
+    public void Init()
+    {
+        model.HP.Onchanged += OnHpChanged;
+        model.MaxHP.Onchanged += OnHpChanged;
+        OnHpChanged();
     }
 
     public void OnMove(InputValue value)
@@ -48,6 +56,14 @@ public class PlayerPresenter
         view.ApplyRotation(model.transform, model.Aim, model.currentRotation, model.minPitch, model.maxPitch);
     }
 
+    public void OnHpChanged()
+    {
+        int currHp = model.HP.Value;
+        int maxHp = model.MaxHP.Value;
+
+        view.UpdateHpBar(currHp, maxHp);
+    }
+
     private IEnumerator AttackCooldown()
     {
         yield return new WaitForSeconds(model.attackCooldown);
@@ -61,7 +77,7 @@ public class PlayerPresenter
         float speed = model.Rb.velocity.magnitude;
         view.PlayMoveAnimation(speed);
     }
-     public void TryAttack()
+    public void TryAttack()
     {
         Debug.Log("공격로직 외부");
         if (model == null)
@@ -80,17 +96,29 @@ public class PlayerPresenter
         if (attackCooldownCoroutine == null)
             attackCooldownCoroutine = mono.StartCoroutine(AttackCooldown());
     }
-    public void Test()
-    {
-        Debug.Log(model.HP.Value);
-    }
     public void TakeDamage(int _dmg)
     {
+        if (model.IsDead || model.isInvincible) return;
+
         model.HP.Value -= _dmg;
         view.PlayHitAnimation();
+
         if (model.HP.Value <= 0)
         {
             view.PlayDeathAnimation();
+            model.Die();
         }
+        model.isInvincible = true;
+        
+        if (invincibleTimeCoroutine == null)
+            invincibleTimeCoroutine = mono.StartCoroutine(IE_invincibleTime());
+        
     }
+    private IEnumerator IE_invincibleTime()
+    {
+        yield return new WaitForSeconds(model.invincibleTime);
+        model.isInvincible = false;
+        invincibleTimeCoroutine = null;
+    }
+    
 }

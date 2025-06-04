@@ -7,4 +7,5 @@ public interface IPlayerView
     void PlayHitAnimation();
     void PlayDeathAnimation();
     void PlayMoveAnimation(float speed);
+    public void UpdateHpBar(int currentHp, int maxHp);
 }

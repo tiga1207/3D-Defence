@@ -1,15 +1,18 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour, IDamageable
+public class PlayerController : MonoBehaviour
 {
     private PlayerPresenter presenter;
 
-    private void Awake()
+    private void Start()
     {
         var model = GetComponent<PlayerModel>();
         var view = GetComponent<IPlayerView>();
         presenter = new PlayerPresenter(model, view, this);
+        presenter.Init();
+        
     }
     private void Update()
     {
@@ -41,4 +44,14 @@ public class PlayerController : MonoBehaviour, IDamageable
             // Debug.Log("공격 키 눌림");
         }
     }
+    // void OnEnable()
+    // {
+    //     Debug.Log(presenter.model.HP.Value);
+    //     presenter?.OnEnable();
+    // }
+
+    // void OnDisable()
+    // {
+    //     presenter?.OnDisable();
+    // }
 }
