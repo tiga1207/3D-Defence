@@ -8,7 +8,7 @@ using System;
 
 namespace Test
 {
-    public class TowerBuildUI : Singleton<TowerBuildUI>
+    public class TowerBuildUI : MonoBehaviour
     {
         [SerializeField] private GameObject PressFTextUI;
         [SerializeField] private GameObject scrollViewObj;
@@ -19,13 +19,8 @@ namespace Test
         public static event Action OnTextInteractOpen;
         public static event Action OnTextInteractClose;
 
-        public static TowerBuildUI instance;
-
         public static void InvokeOpen() => OnTextInteractOpen?.Invoke();
         public static void InvokeClose() => OnTextInteractClose?.Invoke();
-
-
-        void Awake() => base.SingletonInit();
 
         private Test.TriggerTower currentTrigger;
 
@@ -60,10 +55,11 @@ namespace Test
         {
             currentTrigger = trigger;
             scrollViewObj.SetActive(true);
-            
+
             //커서 활성화
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+            // Cursor.lockState = CursorLockMode.None;
+            // Cursor.visible = true;
+            GameManager.Instance.CursorUnLock();
 
             // 버튼 비활성화 여부
             buildBtn.interactable = trigger.CanBuild();
@@ -77,8 +73,10 @@ namespace Test
             currentTrigger = null;
 
             //커서 비활성화
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+            // Cursor.lockState = CursorLockMode.Locked;
+            // Cursor.visible = false;
+            GameManager.Instance.CursorLock();
+
         }
         private void OnClickBuild()
         {

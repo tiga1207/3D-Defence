@@ -20,8 +20,9 @@ public class PlayerMoveTest : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        // Cursor.lockState = CursorLockMode.Locked;
+        // Cursor.visible = false;
+        // GameManager.Instance.CursorLock();
     }
 
     private void FixedUpdate()

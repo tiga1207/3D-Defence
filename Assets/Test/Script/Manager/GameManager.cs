@@ -2,8 +2,10 @@ using DesignPattern;
 using TMPro;
 using UnityEngine;
 
-public class GameManager : Singleton<GameManager>
+// public class GameManager : Singleton<GameManager>
+public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance;
     [Header("UI")]
     [SerializeField] private TMP_Text monsterCountText;
     [SerializeField] private GameObject gameClearUI;
@@ -17,25 +19,48 @@ public class GameManager : Singleton<GameManager>
     public Transform NexusTransform => nexusTransform;
     [SerializeField] private PlayerModel player;
 
-    void OnEnable()
+    private bool isRegistered = false;
+    public bool IsRegister => isRegistered;
+
+
+    void Awake()
     {
-        MonsterModel.OnMonsterDied += OnMonsterDied;
-        Nexus.OnMonsterEnterNexus += HandleGameOver;
-        player.OnPlayerDied += HandleGameOver;
+        // SingletonInit();
+        // CursorLock();
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
-    void OnDisable()
-    {
-        MonsterModel.OnMonsterDied -= OnMonsterDied;
-        Nexus.OnMonsterEnterNexus -= HandleGameOver;
-        player.OnPlayerDied -= HandleGameOver;
-    }
 
     void Start()
     {
         totalMonster = spawnManager.TotalSpawnCount;
         deadMonster = 0;
         UpdateMonsterUI();
+    }
+    public void RegisterEvent()
+    {
+        if (isRegistered) return;
+        Debug.Log("이벤트 구독");
+        MonsterModel.OnMonsterDied += OnMonsterDied;
+        Nexus.OnMonsterEnterNexus += HandleGameOver;
+        player.OnPlayerDied += HandleGameOver;
+        isRegistered = true;
+    }
+    public void UnRegisterEvent()
+    {
+        if (!isRegistered) return;
+        Debug.Log("이벤트 구독 해제");
+        MonsterModel.OnMonsterDied -= OnMonsterDied;
+        Nexus.OnMonsterEnterNexus -= HandleGameOver;
+        player.OnPlayerDied -= HandleGameOver;
+        isRegistered = false;
     }
 
     private void OnMonsterDied()
@@ -46,6 +71,9 @@ public class GameManager : Singleton<GameManager>
         if (deadMonster >= totalMonster)
         {
             gameClearUI.SetActive(true);
+            //커서 풀기 & 시간 정지
+            CursorUnLock();
+            GameTimeManager.Instance.GameOnlyStop();
         }
     }
 
@@ -58,9 +86,28 @@ public class GameManager : Singleton<GameManager>
     private void HandleGameOver()
     {
         gameOverUI.SetActive(true);
+        //커서 풀기 & 시간 정지
+        CursorUnLock();
+        GameTimeManager.Instance.GameOnlyStop();
+        Debug.Log("게임오버로직 실행");
     }
+    
+
     public void SetNexusTransform(Transform nexus)
     {
         nexusTransform = nexus;
+    }
+
+
+    //커서 관련
+    public void CursorUnLock()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+    public void CursorLock()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 }

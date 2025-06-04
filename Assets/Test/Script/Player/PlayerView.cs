@@ -19,8 +19,6 @@ public class PlayerView : MonoBehaviour, IPlayerView
     {
         hpSlider.maxValue = maxHp;
         hpSlider.value = currentHp;
-        Debug.Log("코드 실행");
-         Debug.Log($"[UI Update] HP: {currentHp} / {maxHp}");
     }
 
     //애니메이션

@@ -46,20 +46,26 @@ public class GameTimeManager : Singleton<GameTimeManager>
         //게임 재시작 호출
         OnGameResumed?.Invoke();
     }
-    public void QuitGame()
+
+    public void GameOnlyStop()
     {
+        //Pause 상태인 상태에서 중복호출 방지
+        if (m_isPaused) return;
+
+        //timeScale을 0으로 만들어서 게임 정지 시키기.
+        Time.timeScale = 0f;
+        m_isPaused = true;
+    }
+    public void GameOnlyStart()
+    {
+        //Pause 상태인 상태에서 중복호출 방지
         if (!m_isPaused) return;
 
 
-        //현재 게임 속도
         Time.timeScale = 1f;
         m_isPaused = false;
-
-        //게임 재시작 호출
-        OnGameResumed?.Invoke();
-        
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        Debug.Log("게임 온니 스타트 실행");
+        GameManager.Instance.CursorUnLock();
     }
 }
 

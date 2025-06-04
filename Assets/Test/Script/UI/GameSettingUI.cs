@@ -61,8 +61,9 @@ public class GameSettingUI : MonoBehaviour
         if (PauseUI != null)
         {
             PauseUI.SetActive(true);
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+            // Cursor.lockState = CursorLockMode.None;
+            // Cursor.visible = true;
+            GameManager.Instance.CursorUnLock();
         }
     }
 
@@ -71,8 +72,10 @@ public class GameSettingUI : MonoBehaviour
         if (PauseUI != null)
         {
             PauseUI?.SetActive(false);
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+            // Cursor.lockState = CursorLockMode.Locked;
+            // Cursor.visible = false;
+            GameManager.Instance.CursorLock();
+
         }
     }
 

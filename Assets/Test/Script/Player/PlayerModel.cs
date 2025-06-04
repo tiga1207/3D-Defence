@@ -51,9 +51,16 @@ public class PlayerModel : MonoBehaviour
         // Damage =new(initAtkDmg);
         Damage = new(PlayerData.Instance.atk);
         Rb = GetComponent<Rigidbody>();
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        // Cursor.lockState = CursorLockMode.Locked;
+        // Cursor.visible = false;
+        // Debug.Log(GameManager.Instance);
 
+
+    }
+    void Start()
+    {
+        GameManager.Instance.CursorLock();
+        
     }
     public void Die()
     {
