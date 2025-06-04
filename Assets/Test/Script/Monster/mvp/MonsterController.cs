@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Test;
@@ -7,6 +8,8 @@ using UnityEngine;
 public class MonsterController : MonoBehaviour, IAggroListener, IAttackRangeListener
 {
     private MonsterPresenter presenter;
+    // public event Action OnMonsterDied;
+
     void Start()
     {
         var model = GetComponent<MonsterModel>();
@@ -22,6 +25,7 @@ public class MonsterController : MonoBehaviour, IAggroListener, IAttackRangeList
     {
         presenter.TakeDamage(dmg);
     }
+    
 
     //인터페이스 구현
     public void OnTargetDetected(Transform target) => presenter.OnTargetDetected(target);

@@ -7,6 +7,8 @@ using Util;
 public interface IMonsterView
 {
     // void UpdateHpBar(int hp, int maxhp);
+    public void Init(MonsterPresenter _presenter);
+
 
     void PlayAttackAnimation(MonsterModel.AttackType type);
     void PlayHitAnimation();

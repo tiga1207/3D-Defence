@@ -6,7 +6,13 @@ public class MonsterView : MonoBehaviour, IMonsterView
     [SerializeField] private Slider hpBarSlider;
 
     [SerializeField] Animator anim;
-    [SerializeField] private GameObject coinObj;
+    // [SerializeField] private GameObject coinObj;
+    private MonsterPresenter presenter;
+
+    public void Init(MonsterPresenter _presenter)
+    {
+        presenter = _presenter;
+    }
 
     public void UpdateHpBar(int hp, int maxhp)
     {
@@ -30,13 +36,15 @@ public class MonsterView : MonoBehaviour, IMonsterView
     //사망 애니메이션 끝단에서 실행.
     public void MonsterDied()
     {
-        if (coinObj != null)
-        {
-            Vector3 coinTransfomr = transform.position + Vector3.up;
-            Instantiate(coinObj, coinTransfomr, Quaternion.identity);            
-        }
+        // if (coinObj != null)
+        // {
+        //     Vector3 coinTransfomr = transform.position + Vector3.up;
+        //     Instantiate(coinObj, coinTransfomr, Quaternion.identity);            
+        // }
 
-        Destroy(gameObject);
+        // Destroy(gameObject);
+        presenter.AfterDied();
+        
     }
 
 

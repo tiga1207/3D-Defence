@@ -22,12 +22,12 @@ public class MonsterPresenter
         mono = _mono;
 
         model.Init();
-        model.HP.Onchanged += OnHpChanged;
-        model.MaxHP.Onchanged += OnHpChanged;
+        view.Init(this);
     }
 
     public void Update()
     {
+        if (model.IsDead) return;
         switch (model.currentState)
         {
             case MonsterModel.MonsterState.ChaseTarget:
@@ -46,16 +46,6 @@ public class MonsterPresenter
         float speed = model.Agent.velocity.magnitude;
         view.PlayMoveAnimation(speed);
     }
-
-    private void OnHpChanged()
-    {
-        int hp = model.HP.Value;
-        int maxHp = model.MaxHP.Value;
-        // view.UpdateHpBar(hp, maxHp);
-
-        // if(hp <0)
-        //사망 UI에 적용
-    }
     public void TakeDamage(int _dmg)
     {
         model.HP.Value -= _dmg;
@@ -65,12 +55,22 @@ public class MonsterPresenter
             view.PlayDeathAnimation();
         }
     }
+    public void AfterDied()
+    {
+        // 코인 생성
+        Vector3 coinTransform = model.transform.position + Vector3.up;
+        GameObject.Instantiate(model.coinObj, coinTransform, Quaternion.identity);
+
+        // 사망 알림
+        model.Die();
+
+        // 파괴
+        GameObject.Destroy(model.gameObject);
+    }
 
     public void TryAttack()
     {
-        Debug.Log("공격로직 외부");
         if (model.IsDead || model.isAttacking || !model.canAttack || !model.HasTarget()) return;
-        Debug.Log("공격로직 내부");
 
         model.StartAttack();
         model.isAttacking = true;
@@ -123,9 +123,6 @@ public class MonsterPresenter
         if (target == model.attackTarget)
         {
             Debug.Log("OnOutAttackRange 내부 로직 실행");
-            //     model.isAttacking = false;
-            //     model.canAttack = true;
-            //     model.ChaseTarget(target);
 
             if (model.isAttacking)
             {
@@ -140,14 +137,6 @@ public class MonsterPresenter
         }
     }
 
-    // public void SetTarget(IDamageable target)
-    // {
-    //     model.targetDamageable = target;
-    // }
-    // public void ClearTarget(IDamageable target)
-    // {
-    //     if(model.targetDamageable == target)
-    //         model.targetDamageable = null;
-    // }
+
 
 }
