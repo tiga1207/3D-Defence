@@ -989,13 +989,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initHP: 10
   initMaxHP: 10
-  atkDmg: 2
+  coinObj: {fileID: 6954758372675618198, guid: 986f6a1b0826547c58b98ee3e3c50e16, type: 3}
+  initAtkDmg: 2
   attackType: 1
   attackCooldown: 1
   canAttack: 1
   isAttacking: 0
   isAttackInterrupted: 0
-  nexusTarget: {fileID: 0}
   currentState: 0
   attackTarget: {fileID: 0}
 --- !u!114 &869213095442182725

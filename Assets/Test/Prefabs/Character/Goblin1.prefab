@@ -908,7 +908,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initHP: 10
   initMaxHP: 10
-  atkDmg: 2
+  coinObj: {fileID: 6954758372675618198, guid: 986f6a1b0826547c58b98ee3e3c50e16, type: 3}
+  initAtkDmg: 2
   attackType: 0
   attackCooldown: 1
   canAttack: 1
@@ -943,6 +944,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8cee613dfd40a64f8bd00d70352abd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPlayer: 0
 --- !u!195 &5699114849678988935
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -989,10 +991,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 109f13a649601c644889cc1cf5cb2948, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_shotSound: {fileID: 0}
-  m_hurtSound: {fileID: 0}
-  m_slashSound: {fileID: 0}
-  m_deadSound: {fileID: 0}
+  m_shotSound: {fileID: 8300000, guid: 51a75955cea7541b0809fed2de82be21, type: 3}
+  m_hurtSound: {fileID: 8300000, guid: 3824f145e1a6d2b448be9a786b0903eb, type: 3}
+  m_slashSound: {fileID: 8300000, guid: 480e67b9b7afe460896a20d71a4f0617, type: 3}
+  m_deadSound: {fileID: 8300000, guid: c7bd57922f10a3148b953fcabcce3f54, type: 3}
 --- !u!1 &1021614894529511336
 GameObject:
   m_ObjectHideFlags: 0
