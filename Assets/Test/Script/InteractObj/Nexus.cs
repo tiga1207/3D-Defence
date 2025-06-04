@@ -5,7 +5,7 @@ public class Nexus : MonoBehaviour
 {
     public static event Action OnMonsterEnterNexus;
 
-    void Awake()
+    void Start()
     {
         GameManager.Instance.SetNexusTransform(transform);
     }
