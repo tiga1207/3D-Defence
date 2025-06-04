@@ -15,6 +15,17 @@ public class SceneLoader : MonoBehaviour
         // StartCoroutine(LoadSceneAsync("TestsScene")); 
         StartCoroutine(LoadSceneAsync(loadSceneName)); // 실제 씬 이름, 인스펙터에서 입력하기.
     }
+    public void LoadGameScene(string _sceneName)
+    {
+        // StartCoroutine(LoadSceneAsync("TestsScene")); 
+        StartCoroutine(LoadSceneAsync(_sceneName)); // 실제 씬 이름, 인스펙터에서 입력하기.
+    }
+    public void ReLoadThisScene()
+    {
+        // StartCoroutine(LoadSceneAsync("TestsScene")); 
+        string nowSceneName = gameObject.scene.name;
+        StartCoroutine(LoadSceneAsync(nowSceneName)); // 실제 씬 이름, 인스펙터에서 입력하기.
+    }
 
     private IEnumerator LoadSceneAsync(string sceneName)
     {
